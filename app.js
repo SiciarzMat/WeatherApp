@@ -23,7 +23,9 @@ weather.temperature = {
 };
 
 function searchWeather(city) {
-  fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`)
+  fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`
+  )
     .then((response) => response.json())
     .then((data) => {
       weather.temperature.value = Math.floor(data.main.temp - 273);
@@ -37,12 +39,12 @@ function searchWeather(city) {
 }
 
 function displayWeather() {
-  weatherIcon.innerHTML = `<img src='http://openweathermap.org/img/wn/${weather.iconId.replace(
+  weatherIcon.innerHTML = `<img src='https://openweathermap.org/img/wn/${weather.iconId.replace(
     /\D/g,
     ""
   )}d@2x.png' height="150px"
   width="150px"/>`;
-  document.body.style.backgroundImage = `url('/images/${weather.main}.jpg')`;
+  document.body.style.backgroundImage = `url('images/${weather.main}.jpg')`;
   temperature.innerHTML = `${weather.temperature.value} °<span>C</span>`;
   description.innerHTML = `${weather.description.toUpperCase()}`;
   locationParagraph.innerHTML = `${weather.city}, ${weather.country}`;

@@ -1,3 +1,4 @@
+import Notiflix from "notiflix";
 const weatherIcon = document.querySelector(".weather-icon");
 const locationIcon = document.querySelector(".location-icon");
 const temperature = document.querySelector(".temperature-value p");
@@ -26,7 +27,15 @@ const searchWeather = (city) => {
   fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`
   )
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        Notiflix.Notify.failure(
+          "Oops, there is no such city. Please check the spelling."
+        );
+      } else {
+        return response.json();
+      }
+    })
     .then((data) => {
       weather.temperature.value = Math.floor(data.main.temp - 273);
       weather.description = data.weather[0].description;
@@ -35,7 +44,8 @@ const searchWeather = (city) => {
       weather.country = data.sys.country;
       weather.main = data.weather[0].main;
     })
-    .then(displayWeather);
+    .then(displayWeather)
+    .catch();
 };
 
 const displayWeather = () => {

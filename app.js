@@ -1,4 +1,3 @@
-import Notiflix from "notiflix";
 const weatherIcon = document.querySelector(".weather-icon");
 const locationIcon = document.querySelector(".location-icon");
 const temperature = document.querySelector(".temperature-value p");
@@ -29,9 +28,7 @@ const searchWeather = (city) => {
   )
     .then((response) => {
       if (!response.ok) {
-        Notiflix.Notify.failure(
-          "Oops, there is no such city. Please check the spelling."
-        );
+        alert("Oops, there is no such city. Please check the spelling.");
       } else {
         return response.json();
       }

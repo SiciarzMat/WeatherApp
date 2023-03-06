@@ -28,7 +28,7 @@ const searchWeather = (city) => {
   )
     .then((response) => {
       if (!response.ok) {
-        alert("Oops, there is no such city. Please check the spelling.");
+        alert("Oops, there is no such city. Please check the spelling!");
       } else {
         return response.json();
       }

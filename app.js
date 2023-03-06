@@ -39,6 +39,9 @@ const searchWeather = (city) => {
 };
 
 const displayWeather = () => {
+  if (weather.iconId === "50d") {
+    weather.main = "Mist";
+  }
   weatherIcon.innerHTML = `<img src='https://openweathermap.org/img/wn/${weather.iconId.replace(
     /\D/g,
     ""

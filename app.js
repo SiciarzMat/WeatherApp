@@ -8,7 +8,7 @@ const key = "c6614b703a6817a1b417adec2e0db7ee";
 const input = document.getElementById("search");
 let city = "";
 
-input.addEventListener("keyup", function (e) {
+input.addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     e.preventDefault();
     city = input.value;
@@ -22,7 +22,7 @@ weather.temperature = {
   unit: "celsius",
 };
 
-function searchWeather(city) {
+const searchWeather = (city) => {
   fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`
   )
@@ -36,9 +36,9 @@ function searchWeather(city) {
       weather.main = data.weather[0].main;
     })
     .then(displayWeather);
-}
+};
 
-function displayWeather() {
+const displayWeather = () => {
   weatherIcon.innerHTML = `<img src='https://openweathermap.org/img/wn/${weather.iconId.replace(
     /\D/g,
     ""
@@ -48,4 +48,4 @@ function displayWeather() {
   temperature.innerHTML = `${weather.temperature.value} °<span>C</span>`;
   description.innerHTML = `${weather.description.toUpperCase()}`;
   locationParagraph.innerHTML = `${weather.city}, ${weather.country}`;
-}
+};

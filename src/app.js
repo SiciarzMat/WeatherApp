@@ -1,15 +1,15 @@
-const weatherIcon = document.querySelector(".weather-icon");
-const locationIcon = document.querySelector(".location-icon");
-const temperature = document.querySelector(".temperature-value p");
-const description = document.querySelector(".temperature-description p");
-const locationParagraph = document.querySelector(".location p");
-const key = "c6614b703a6817a1b417adec2e0db7ee";
+const weatherIcon = document.querySelector('.weather-icon');
+const locationIcon = document.querySelector('.location-icon');
+const temperature = document.querySelector('.temperature-value p');
+const description = document.querySelector('.temperature-description p');
+const locationParagraph = document.querySelector('.location p');
+const key = 'c6614b703a6817a1b417adec2e0db7ee';
 
-const input = document.getElementById("search");
-let city = "";
+const input = document.getElementById('search');
+let city = '';
 
-input.addEventListener("keypress", function (e) {
-  if (e.key === "Enter") {
+input.addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
     e.preventDefault();
     city = input.value;
     searchWeather(city);
@@ -19,21 +19,21 @@ input.addEventListener("keypress", function (e) {
 const weather = {};
 
 weather.temperature = {
-  unit: "celsius",
+  unit: 'celsius',
 };
 
-const searchWeather = (city) => {
+const searchWeather = city => {
   fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`
   )
-    .then((response) => {
+    .then(response => {
       if (!response.ok) {
-        alert("Oops, there is no such city. Please check the spelling!");
+        alert('Oops, there is no such city. Please check the spelling!');
       } else {
         return response.json();
       }
     })
-    .then((data) => {
+    .then(data => {
       weather.temperature.value = Math.floor(data.main.temp - 273);
       weather.description = data.weather[0].description;
       weather.iconId = data.weather[0].icon;
@@ -46,12 +46,12 @@ const searchWeather = (city) => {
 };
 
 const displayWeather = () => {
-  if (weather.iconId === "50d") {
-    weather.main = "Mist";
+  if (weather.iconId === '50d') {
+    weather.main = 'Mist';
   }
   weatherIcon.innerHTML = `<img src='https://openweathermap.org/img/wn/${weather.iconId.replace(
     /\D/g,
-    ""
+    ''
   )}d@2x.png' height="150px"
   width="150px"/>`;
   document.body.style.backgroundImage = `url('images/${weather.main}.jpg')`;

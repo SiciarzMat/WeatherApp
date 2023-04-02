@@ -54,7 +54,7 @@ const displayWeather = () => {
     ''
   )}d@2x.png' height="150px"
   width="150px"/>`;
-  document.body.style.backgroundImage = `url('images/${weather.main}.jpg')`;
+  document.body.style.backgroundImage = `url('./images/${weather.main}.jpg')`;
   temperature.innerHTML = `${weather.temperature.value} °<span>C</span>`;
   description.innerHTML = `${weather.description.toUpperCase()}`;
   locationParagraph.innerHTML = `${weather.city}, ${weather.country}`;
